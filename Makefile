@@ -11,7 +11,7 @@ BIN_DIR = bin
 SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
-all: $(BIN_DIR)/$(TARGET)
+all: $(BIN_DIR)/$(TARGET) 
 
 $(BIN_DIR)/$(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)

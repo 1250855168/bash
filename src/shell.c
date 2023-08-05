@@ -8,7 +8,6 @@
 #include "command.h"
 #include "utils.h"
 
-#define MAX_LINE_LENGTH 1024
 
 void run_shell() {
      char *line;
@@ -35,8 +34,7 @@ void run_shell() {
 
         if (strcmp(args[0], "cd") == 0) {
             if (args[1] == NULL) {
-                // 没有指定目录参数，转到主目录
-                chdir(getenv("HOME"));
+                continue;
             } else {
                 if (chdir(args[1]) == -1) {
                     perror("chdir");

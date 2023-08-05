@@ -7,10 +7,23 @@
 #include "command.h"
 #include "utils.h"
 
+
+void parse_command(const char *command, char **args) {
+    char *token;
+    int i = 0;
+
+    token = strtok((char *)command, " ");
+    while (token != NULL && i < MAX_ARGS - 1) {
+        args[i] = strdup(token);
+        token = strtok(NULL, " ");
+        i++;
+    }
+    args[i] = NULL;
+}
+
 void execute_command(char **args) {
     pid_t pid;
     int status;
-
 
     pid = fork();
     if (pid == 0) {
@@ -30,15 +43,3 @@ void execute_command(char **args) {
     }
 }
 
-void parse_command(const char *command, char **args) {
-    char *token;
-    int i = 0;
-
-    token = strtok((char *)command, " ");
-    while (token != NULL && i < MAX_ARGS - 1) {
-        args[i] = strdup(token);
-        token = strtok(NULL, " ");
-        i++;
-    }
-    args[i] = NULL;
-}

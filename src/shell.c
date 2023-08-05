@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <readline/readline.h>
+#include<readline/history.h>
 #include "shell.h"
 #include "command.h"
 #include "utils.h"
@@ -9,33 +11,29 @@
 #define MAX_LINE_LENGTH 1024
 
 void run_shell() {
-    char line[MAX_LINE_LENGTH];
+     char *line;
     char *args[MAX_ARGS];
 
     while (1) {
-        printf("MyShell> ");
-        fflush(stdout);
+        line = readline("MyShell> ");
 
-        if (fgets(line, sizeof(line), stdin) == NULL) {
+        if (line == NULL) {
             break;
         }
 
-        // Remove trailing newline character
-        line[strcspn(line, "\n")] = '\0';
-
-               // 检查命令是否为空
+        // 检查命令是否为空
         if (strlen(line) == 0) {
+            free(line);
             continue;
         }
 
-
-        // autocomplete(line);
-        // printf("\n");
+        // 添加输入到历史记录
+        add_history(line);
 
         // Parse command
         parse_command(line, args);
 
-                    if (strcmp(args[0], "cd") == 0) {
+        if (strcmp(args[0], "cd") == 0) {
             if (args[1] == NULL) {
                 // 没有指定目录参数，转到主目录
                 chdir(getenv("HOME"));
@@ -44,6 +42,7 @@ void run_shell() {
                     perror("chdir");
                 }
             }
+            free(line);
             continue;
         }
 
@@ -54,5 +53,7 @@ void run_shell() {
         for (int i = 0; args[i] != NULL; i++) {
             free(args[i]);
         }
+
+        free(line);
     }
 }

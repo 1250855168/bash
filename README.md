@@ -4,7 +4,7 @@
 
 <img src="image\image-20230805162708561.png" alt="image-20230805162708561" style="zoom:80%;" />
 
-<img src="C:\Users\CHENMENG\Desktop\project\面试项目详细介绍\my_shell\image-20230805162732005.png" alt="image-20230805162732005" style="zoom:80%;" />
+<img src="image\image-20230805162732005.png" alt="image-20230805162732005" style="zoom:80%;" />
 
 ### 代码架构
 

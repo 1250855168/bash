@@ -14,7 +14,7 @@ void run_shell() {
     char *args[MAX_ARGS];
 
     while (1) {
-        line = readline("MyShell> ");
+        line = readline(COLOR_CYAN "MyShell> " COLOR_RESET);
 
         if (line == NULL) {
             break;
@@ -28,7 +28,7 @@ void run_shell() {
 
         // 添加输入到历史记录
         add_history(line);
-
+        
         // Parse command
         parse_command(line, args);
 
